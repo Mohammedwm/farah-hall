@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Dashboard\DashboardController;
-use App\Http\Controllers\dashboard\ProfileUser;
+use App\Http\Controllers\Dashboard\ProfileUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +25,8 @@ Route::group([
 
 ],function(){
     Route::get('/', [DashboardController::class,'index'])->name('index');
-    Route::get('/profile', [ProfileUser::class,'index'])->name('profile');
+    Route::get('/profile', [ProfileUserController::class,'index'])->name('profile');
+    Route::post('/profile', [ProfileUserController::class,'store'])->name('profile.store');
 });
 
 require __DIR__.'/auth.php';

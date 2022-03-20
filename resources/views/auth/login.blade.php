@@ -36,6 +36,7 @@
                     <!-- Validation Errors -->
                     <x-auth-validation-errors class="mb-4" :errors="$errors" />
                     <form class="form" novalidate="novalidate" id="kt_login_signin_form" method="POST" action="{{ route('login') }}">
+                        @csrf
                         <!--begin::Title-->
                         <div class="pb-13 pt-lg-0 pt-5">
                             <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">Welcome to Metronic
@@ -68,7 +69,7 @@
                         <!--end::Form group-->
                         <!--begin::Action-->
                         <div class="pb-lg-0 pb-5">
-                            <button type="button" id="kt_login_signin_submit"
+                            <button type="submit"
                                 class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">Sign
                                 In</button>
                             {{-- <button type="button"

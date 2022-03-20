@@ -5,32 +5,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title> {{ config('app.name', 'Laravel') }} </title>
-        <link rel="shortcut icon" type="image/x-icon" href="#">
-        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/fontawesome.min.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/plugins/fontawesome/css/all.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/feathericon.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/plugins/morris/morris.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-</head>
-<head>
-    <meta charset="utf-8" />
-    <title>Login</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title> {{ config('app.name', 'Laravel') }} </title>
-    <!--begin::Fonts-->
+    <title> Login | {{ config('app.name', 'Laravel') }} </title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
-    <!--end::Fonts-->
-    <!--begin::Page Custom Styles(used by this page)-->
     <link href="{{ asset('assets/css/pages/login/login-1.css') }}" rel="stylesheet" type="text/css" />
     <!--end::Page Custom Styles-->
     <!--begin::Global Theme Styles(used by all pages)-->
     <link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/plugins/custom/prismjs/prismjs.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+
     <!--end::Global Theme Styles-->
     <!--begin::Layout Themes(used by all pages)-->
     <link href="{{ asset('assets/css/themes/layout/header/base/light.css') }}" rel="stylesheet" type="text/css" />
@@ -39,6 +22,7 @@
     <link href="{{ asset('assets/css/themes/layout/aside/dark.css') }}" rel="stylesheet" type="text/css" />
     <!--end::Layout Themes-->
     <link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}" />
+
 </head>
 
 <body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
@@ -53,7 +37,7 @@
 	<script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
 	<!--end::Global Theme Bundle-->
 	<!--begin::Page Scripts(used by this page)-->
-	<script src="{{ asset('assets/js/pages/custom/login/login-general.js') }}"></script>
+	{{-- <script src="{{ asset('assets/js/pages/custom/login/login-general.js') }}"></script> --}}
 </body>
 
 </html>
