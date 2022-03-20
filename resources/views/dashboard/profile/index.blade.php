@@ -12,13 +12,13 @@
                 @csrf
                 <div class="card-body">
                     <div class="form-group row">
-                        <x-form.input id="owner_name" name="owner_name" label="اسم المالك" value="" />
+                        <x-form.input id="owner_name" name="owner_name" label="اسم المالك" :value="$profile->owner_name" />
                     </div>
                     <div class="form-group row">
-                        <x-form.input id="hall_name" name="hall_name" label="اسم الصالة" value="" />
+                        <x-form.input id="hall_name" name="hall_name" label="اسم الصالة" :value="$profile->hall_name" />
                     </div>
                     <div class="form-group row">
-                        <x-form.input id="address" name="address" label="العنوان" value="" />
+                        <x-form.input id="address" name="address" label="العنوان" :value="$profile->address" />
                     </div>
                     <div class="form-group row">
                         <x-form.input type="number" id="mobile" name="mobile" label="رقم الجوال" value="" />

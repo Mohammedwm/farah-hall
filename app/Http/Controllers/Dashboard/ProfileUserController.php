@@ -10,22 +10,23 @@ class ProfileUserController extends Controller
 {
     public function index()
     {
-        return view('dashboard.profile.index');
+        $profile = ProfileUser::where('user_id',auth()->user()->id)->first();
+        //dd($profile);
+        return view('dashboard.profile.index',compact('profile'));
     }
     public function store(Request $request)
     {
-        $rules = $this->rules();
-        $request->validate($rules, [
-            'owner_name' => 'required|exists:profile_users,id',
-            'hall_name' => 'required|exists:profile_users,id',
-            'compare_price' => 'nullable|numeric|gt:price',
+        $request->validate([
+            'owner_name' => 'required',
+            'hall_name' => 'required',
             'mobile' => 'nullable|int',
             'tel' => 'nullable|int',
             'size' => 'nullable|int',
             'created_date' => 'nullable|date',
         ]);
-
-        $profileUser = ProfileUser::create($request->all());
+        $data = $request->except('_token');
+        $data['user_id'] = auth()->user()->id;
+        $profileUser = ProfileUser::create($data);
         return redirect()
             ->route('dashboard.profile.index')
             ->with('success', "تمت العملية بنجاح");
