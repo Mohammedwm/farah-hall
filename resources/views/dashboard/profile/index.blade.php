@@ -12,26 +12,54 @@
                 @csrf
                 <div class="card-body">
                     <div class="form-group row">
-                        <x-form.input id="owner_name" name="owner_name" label="اسم المالك" :value="$profile->owner_name" />
+                        <x-form.label class="col-2" label="اسم المالك" />
+                        <div class="col-10">
+                            <x-form.input name="owner_name" :value="$profile->owner_name" />
+                        </div>
                     </div>
                     <div class="form-group row">
-                        <x-form.input id="hall_name" name="hall_name" label="اسم الصالة" :value="$profile->hall_name" />
+                        <x-form.label class="col-2" label="اسم الصالة" />
+                        <div class="col-10">
+                            <x-form.input name="hall_name" :value="$profile->hall_name" />
+                        </div>
                     </div>
                     <div class="form-group row">
-                        <x-form.input id="address" name="address" label="العنوان" :value="$profile->address" />
+                        <x-form.label class="col-2" label="العنوان" />
+                        <div class="col-10">
+                            <x-form.input name="address" :value="$profile->address" />
+                        </div>
                     </div>
                     <div class="form-group row">
-                        <x-form.input type="number" id="mobile" name="mobile" label="رقم الجوال" value="" />
+                        <x-form.label class="col-2" label="رقم الجوال" />
+                        <div class="col-4">
+                            <x-form.input type="number" name="mobile" :value="$profile->address" />
+                        </div>
+                        <x-form.label class="col-2" label="رقم التلفون" />
+                        <div class="col-4">
+                            <x-form.input type="number" name="tel" :value="$profile->tel" />
+                        </div>
                     </div>
                     <div class="form-group row">
-                        <x-form.input type="number" id="tel" name="tel" label="رقم التلفون" value="" />
+                        <x-form.label class="col-2" label="تاريخ الإنشاء" />
+                        <div class="col-4">
+                            <x-form.input type="date" name="created_date" :value="$profile->created_date" />
+                        </div>
+                        <x-form.label class="col-2" label="مساحة الصالة (م2)" />
+                        <div class="col-4">
+                            <x-form.input type="number" name="size" :value="$profile->size" />
+                        </div>
                     </div>
                     <div class="form-group row">
-                        <x-form.input type="date" id="created_date" name="created_date" label="تاريخ الإنشاء" value="" />
+                        <x-form.label class="col-2" label="عدد الأفراد من" />
+                        <div class="col-4">
+                            <x-form.input type="number" name="max_count" :value="$profile->created_date" />
+                        </div>
+                        <x-form.label class="col-2" label="إلى" />
+                        <div class="col-4">
+                            <x-form.input type="number" name="max_count" :value="$profile->size" />
+                        </div>
                     </div>
-                    <div class="form-group row">
-                        <x-form.input type="number" id="size" name="size" label="مساحة الصالة (م2)" value="" />
-                    </div>
+
                 </div>
                 <div class="card-footer">
                     <div class="row">

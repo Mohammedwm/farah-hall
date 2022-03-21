@@ -11,7 +11,6 @@ class ProfileUserController extends Controller
     public function index()
     {
         $profile = ProfileUser::where('user_id',auth()->user()->id)->first();
-        //dd($profile);
         return view('dashboard.profile.index',compact('profile'));
     }
     public function store(Request $request)
@@ -26,9 +25,23 @@ class ProfileUserController extends Controller
         ]);
         $data = $request->except('_token');
         $data['user_id'] = auth()->user()->id;
-        $profileUser = ProfileUser::create($data);
+        $profileUser = ProfileUser::updateOrCreate(
+            ['user_id' => $data['user_id'] ]
+            ,
+            [
+                'owner_name'    => $data['owner_name'],
+                'hall_name'     => $data['hall_name'],
+                'address'       => $data['address'],
+                'created_date'  => $data['created_date'],
+                'mobile'        => $data['mobile'],
+                'tel'           => $data['tel'],
+                'size'          => $data['size'],
+            //    'min_count'     => $data['min_count'],
+            //    'max_count'     => $data['max_count'],
+            ]
+        );
         return redirect()
-            ->route('dashboard.profile.index')
+            ->route('dashboard.profile')
             ->with('success', "تمت العملية بنجاح");
     }
 }
