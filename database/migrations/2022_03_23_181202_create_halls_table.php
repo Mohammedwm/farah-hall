@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('profile_users', function (Blueprint $table) {
+        Schema::create('halls', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')
                 ->constrained('users')
@@ -22,11 +22,10 @@ return new class extends Migration
             $table->string('hall_name');
             $table->string('address')->nullable();
             $table->date('created_date')->nullable();
-            $table->integer('mobile')->nullable();
-            $table->integer('tel')->nullable();
             $table->float('size')->nullable();
             $table->integer('min_count')->nullable();
             $table->integer('max_count')->nullable();
+            $table->text('detail')->nullable();
 
             $table->timestamps();
         });
@@ -39,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('profile_users');
+        Schema::dropIfExists('halls');
     }
 };

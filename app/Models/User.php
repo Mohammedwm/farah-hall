@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'mobile',
+        'tel',
     ];
 
     /**
@@ -42,7 +44,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function profileUser(){
-        return $this->belongsTo(ProfileUser::class);
+
+    public function halls(){
+        return $this->hasMany(Hall::class);
     }
+
 }

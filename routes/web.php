@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\HallsController;
+use App\Http\Controllers\Dashboard\ServicesController;
 use App\Http\Controllers\Dashboard\ProfileUserController;
 
 /*
@@ -16,7 +18,7 @@ use App\Http\Controllers\Dashboard\ProfileUserController;
 |
 */
 
-Route::get('/', [HomeController::class,'index']);
+Route::get('/', [HomeController::class,'index'])->middleware('auth');
 Route::group([
     'prefix' => '/dashboard',
     'as' => 'dashboard.',
@@ -25,8 +27,8 @@ Route::group([
 
 ],function(){
     Route::get('/', [DashboardController::class,'index'])->name('index');
-    Route::get('/profile', [ProfileUserController::class,'index'])->name('profile');
-    Route::post('/profile', [ProfileUserController::class,'store'])->name('profile.store');
+    Route::resource('/hall', 'HallsController')->names('hall');
+    Route::resource('/service', 'ServicesController')->names('service');
 });
 
 require __DIR__.'/auth.php';

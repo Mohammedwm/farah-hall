@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('password');
             $table->enum('type', ['admin', 'user', 'public'])
                 ->default('public');
+            $table->integer('mobile')->nullable();
+            $table->integer('tel')->nullable();
             $table->enum('status', ['active', 'inactive'])
                 ->default('active');
 

@@ -36,7 +36,8 @@ License: You must have a valid license purchased only from themeforest(the above
 		<link href="{{ asset('assets/css/themes/layout/header/menu/light.rtl.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('assets/css/themes/layout/brand/dark.rtl.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('assets/css/themes/layout/aside/dark.rtl.css') }}" rel="stylesheet" type="text/css" />
-		<!--end::Layout Themes-->
+        @stack('style')
+        <!--end::Layout Themes-->
 		<link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}" />
 	</head>
 	<!--end::Head-->
@@ -126,13 +127,19 @@ License: You must have a valid license purchased only from themeforest(the above
 									<h4 class="menu-text">Custom</h4>
 									<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 								</li>
+
                                 <li class="menu-item" aria-haspopup="true">
-									<a href="{{route('dashboard.profile')}}" class="menu-link">
+									<a href="{{route('dashboard.hall.index')}}" class="menu-link">
 										<i class="menu-icon flaticon-home"></i>
-										<span class="menu-text">الملف الشخصي</span>
+										<span class="menu-text">صالات الأفراح</span>
 									</a>
 								</li>
-
+                                <li class="menu-item" aria-haspopup="true">
+									<a href="{{route('dashboard.service.index')}}" class="menu-link">
+										<i class="menu-icon flaticon-home"></i>
+										<span class="menu-text">الخدمات</span>
+									</a>
+								</li>
 							</ul>
 							<!--end::Menu Nav-->
 						</div>
@@ -665,18 +672,19 @@ License: You must have a valid license purchased only from themeforest(the above
 									<!--end::Dropdown-->
 								</div>
 								<!--end::Notifications-->
-
+								@if (auth()->check())
 								<!--begin::User-->
 								<div class="topbar-item">
 									<div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
-										<span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
-										<span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">Sean</span>
+										<span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">أهلا,</span>
+										<span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">{{auth()->user()->name}}</span>
 										<span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
 											<span class="symbol-label font-size-h5 font-weight-bold">S</span>
 										</span>
 									</div>
 								</div>
 								<!--end::User-->
+								@endif
 							</div>
 							<!--end::Topbar-->
 						</div>
@@ -770,8 +778,12 @@ License: You must have a valid license purchased only from themeforest(the above
 						<i class="symbol-badge bg-success"></i>
 					</div>
 					<div class="d-flex flex-column">
-						<a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">James Jones</a>
-						<div class="text-muted mt-1">Application Developer</div>
+						<a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">@if (Auth::check()){{auth()->user()->name}}@endif</a>
+						<div class="text-muted mt-1">
+                            @if (Auth::check())
+                            {{auth()->user()->type}}
+                            @endif
+                            </div>
 						<div class="navi mt-2">
 							<a href="#" class="navi-item">
 								<span class="navi-link p-0 pb-2">
@@ -1027,7 +1039,9 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!--end::Page Vendors-->
 		<!--begin::Page Scripts(used by this page)-->
 		<script src="{{ asset('assets/js/pages/widgets.js') }}"></script>
+        @stack('js')
 		<!--end::Page Scripts-->
 	</body>
 	<!--end::Body-->
 </html>
+
