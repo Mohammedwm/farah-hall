@@ -35,15 +35,16 @@
         </div>
         <div class="card-body">
             <!--begin: Datatable-->
-            <table class="table table-bordered table-checkable" id="halls_tb">
+            <table class="table table-separate table-head-custom collapsed" id="halls_tb">
                 <thead>
                     <tr>
                         <th>اسم المالك</th>
                         <th>اسم القاعة</th>
-                        <th>العنوان</th>
+                        <th class="none">العنوان</th>
                         <th>المساحة (م2)</th>
                         <th>عدد الأفراد(شخص)</th>
                         <th>تاريخ الإنشاء</th>
+                        <th>حالة القاعة</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -52,14 +53,24 @@
                     <tr>
                         <td>{{$hall->owner_name}}</td>
                         <td>{{$hall->hall_name}}</td>
-                        <td>{{$hall->address}}</td>
+                        <td class="none">{{$hall->address}}</td>
                         <td>{{$hall->size}}</td>
                         <td>{{$hall->min_count }} - {{ $hall->max_count}}</td>
                         <td>{{$hall->created_date}}</td>
+                        <td>{{$hall->status}}</td>
                         <td>
+                            @if (auth()->user()->id == $hall->user_id)
                             <a href="{{ route('dashboard.hall.edit', [$hall->id]) }}" class="btn btn-sm btn-clean btn-icon mr-2" title="Edit details">
 	                            <i class="icon-x far fa-edit"></i>
 	                        </a>
+                            @endif
+                            @if (auth()->user()->type == 'admin' && $hall->status == 'uncertified')
+                            <form action="{{ route('dashboard.hall.changeStatus', $hall->id) }}" method="post">
+                                @csrf
+                                <button type="submit" class="btn btn-sm btn-clean btn-icon mr-2"><i class="icon-xl fas fa-check"></i></button>
+                            </form>
+
+                            @endif
                         </td>
                     </tr>
                     @endforeach
@@ -76,7 +87,24 @@
     <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
     <script>
     $(document).ready(function(){
-        $('#halls_tb').DataTable();
+
+
+    $('#halls_tb').DataTable({
+			responsive: true,
+			columnDefs: [
+				{
+					targets: 6,
+					render: function(data, type, full, meta) {
+
+						var status = {
+                            certified: {'title': 'معتمد', 'class': 'label-light-success'},
+							uncertified: {'title': 'غير معتمد', 'class': 'label-light-danger'},
+						};
+						return '<span class="label label-lg font-weight-bold ' + status[data].class + ' label-inline">' + status[data].title + '</span>';
+					},
+				},
+			]
+		});
     });
     </script>
     @endpush

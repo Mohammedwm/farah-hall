@@ -26,6 +26,8 @@ return new class extends Migration
             $table->integer('min_count')->nullable();
             $table->integer('max_count')->nullable();
             $table->text('detail')->nullable();
+            $table->enum('status', ['certified ', 'uncertified'])
+                ->default('uncertified');
 
             $table->timestamps();
         });

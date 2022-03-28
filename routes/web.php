@@ -6,6 +6,9 @@ use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\HallsController;
 use App\Http\Controllers\Dashboard\ServicesController;
 use App\Http\Controllers\Dashboard\ProfileUserController;
+use App\Http\Controllers\Dashboard\HallServicesController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +31,11 @@ Route::group([
 ],function(){
     Route::get('/', [DashboardController::class,'index'])->name('index');
     Route::resource('/hall', 'HallsController')->names('hall');
-    Route::resource('/service', 'ServicesController')->names('service');
+    Route::resource('/service', 'ServicesController')->names('service')->middleware('auth.admin');
+    Route::post('/hall/{product}/changeStatus', [HallsController::class, 'changeStatus'])
+        ->name('hall.changeStatus')->middleware('auth.admin');
+    Route::resource('/HallService', 'HallServicesController')->names('HallService');
+
 });
 
 require __DIR__.'/auth.php';

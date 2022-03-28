@@ -17,4 +17,15 @@ class Hall extends Model
         return $this->belongsTo(User::class);
 
     }
+    public function hallServices()
+    {
+        return $this->belongsToMany(
+            Service::class,
+            'hall_services',
+            'hall_id',
+            'service_id',
+            'id',
+            'id'
+        );
+    }
 }

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Events\HallCreated;
 use App\Http\Controllers\Controller;
 use App\Models\Hall;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HallsController extends Controller
 {
@@ -15,7 +17,12 @@ class HallsController extends Controller
      */
     public function index()
     {
-        $halls = Hall::all();
+        if(auth()->user()->type == 'admin'){
+            $halls = Hall::all();
+        }else{
+            $halls = Hall::where('user_id',auth()->id())->get();
+        }
+
         return view('dashboard.halls.index',compact('halls'));
     }
 
@@ -50,6 +57,8 @@ class HallsController extends Controller
         $data = $request->except('_token');
         $data['user_id'] = auth()->user()->id;
         $hall = Hall::create($data);
+
+        event(new HallCreated($hall));
 
         return redirect()
             ->route('dashboard.hall.index')
@@ -102,11 +111,23 @@ class HallsController extends Controller
 
         $hall->update($data);
 
+        event(new HallCreated($hall));
+
         return redirect()
             ->route('dashboard.hall.index')
             ->with('success', "تمت عملية التعديل بنجاح");
     }
 
+    public function changeStatus(Request $request, $id)
+    {
+        DB::table('halls')
+                ->where('id', $id)
+                ->update(['status' => 'certified']);
+
+        return redirect()
+            ->route('dashboard.hall.index')
+            ->with('success', "تم اعتماد القاعة بنجاح");
+    }
     /**
      * Remove the specified resource from storage.
      *
