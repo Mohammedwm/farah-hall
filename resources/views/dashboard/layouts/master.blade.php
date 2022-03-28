@@ -137,19 +137,17 @@ License: You must have a valid license purchased only from themeforest(the above
                                 @if (auth()->user()->type == 'admin')
                                 <li class="menu-item" aria-haspopup="true">
 									<a href="{{route('dashboard.service.index')}}" class="menu-link">
-										<i class="menu-icon flaticon-home"></i>
+										<i class="menu-icon la la-server"></i>
 										<span class="menu-text">الخدمات</span>
 									</a>
 								</li>
                                 @endif
-
                                 <li class="menu-item" aria-haspopup="true">
 									<a href="{{route('dashboard.HallService.index')}}" class="menu-link">
-										<i class="menu-icon flaticon-home"></i>
+										<i class="menu-icon la fab la-buffer"></i>
 										<span class="menu-text">خدمات القاعة</span>
 									</a>
 								</li>
-
 							</ul>
 							<!--end::Menu Nav-->
 						</div>

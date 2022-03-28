@@ -22,7 +22,7 @@ return new class extends Migration
                 ->constrained('services')
                 ->cascadeOnDelete();
             $table->integer('price');
-            $table->string('notes');
+            $table->string('notes')->nullable();
             $table->timestamps();
         });
     }

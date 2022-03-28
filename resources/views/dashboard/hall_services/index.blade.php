@@ -51,9 +51,11 @@
                         <td>{{$hall_service->service->name}}</td>
                         <td>{{$hall_service->price}}</td>
                         <td>
+                            @if (auth()->user()->id == $hall_service->hall->user_id)
                             <a href="{{ route('dashboard.service.edit', [$hall_service->id]) }}" class="btn btn-sm btn-clean btn-icon mr-2" title="Edit details">
 	                            <i class="icon-x far fa-edit"></i>
 	                        </a>
+                            @endif
                         </td>
                     </tr>
                     @endforeach
